@@ -35,8 +35,17 @@ jobs:
           cp alerting/build/distributions/*.deb alerting-artifacts
           cp alerting/build/distributions/*.rpm alerting-artifacts
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
-          rpm_artifact=`ls alerting/build/distributions/*.rpm`
-          deb_artifact=`ls alerting/build/distributions/*.deb`
+          pwd
+          ls
+          cd alerting
+          ls
+          cd build
+          ls
+          cd distributions
+          ls
+#          zip_artifact=`ls alerting/build/distributions/*.zip`
+#          rpm_artifact=`ls alerting/build/distributions/*.rpm`
+#          deb_artifact=`ls alerting/build/distributions/*.deb`
 
 #     # AWS authentication
 #      - name: Configure AWS Credentials
@@ -69,7 +78,6 @@ jobs:
       # Upload the release with .zip as asset
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1.0.1
-        run: zip_artifact=`ls alerting/build/distributions/*.zip`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -100,8 +108,8 @@ jobs:
 #          asset_path: deb_artifact
 #          asset_content_type: application/zip
 
-      - name: Upload Workflow Artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: alerting-plugin
-          path: alerting-artifacts
+#      - name: Upload Workflow Artifacts
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: alerting-plugin
+#          path: alerting-artifacts
