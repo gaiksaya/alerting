@@ -46,6 +46,8 @@ jobs:
           cd build
           ls
           echo "-------------------------"
+          pwd
+          echo "-------------------------"
           cd distributions
           ls
 #          zip_artifact=`ls alerting/build/distributions/*.zip`
