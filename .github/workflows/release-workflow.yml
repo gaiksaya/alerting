@@ -32,8 +32,11 @@ jobs:
         run: |
           mkdir -p alerting-artifacts
           cp alerting/build/distributions/*.zip alerting-artifacts
+          cp alerting/build/distributions/*.zip alerting-artifacts_zip
           cp alerting/build/distributions/*.deb alerting-artifacts
+          cp alerting/build/distributions/*.deb alerting-artifacts_deb
           cp alerting/build/distributions/*.rpm alerting-artifacts
+          cp alerting/build/distributions/*.rpm alerting-artifacts_rpm
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
           echo "Working directory"
           pwd
@@ -50,7 +53,7 @@ jobs:
           echo "-------------------------"
           cd distributions
           ls
-          zip_artifact=`ls alerting/alerting/build/distributions/*.zip`
+#          zip_artifact=`ls alerting/alerting/build/distributions/*.zip`
 #          rpm_artifact=`ls alerting/build/distributions/*.rpm`
 #          deb_artifact=`ls alerting/build/distributions/*.deb`
 
@@ -90,7 +93,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_name: alerting.zip
-          asset_path: zip_artifact
+          asset_path: alerting-artifacts_zip
           asset_content_type: application/zip
 
 #      # Upload the release with .rpm as asset
