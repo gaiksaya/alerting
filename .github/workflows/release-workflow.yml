@@ -75,7 +75,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_name: alerting.zip
-          asset_path: zip_artifact
+          asset_path: alerting/build/distributions/opendistro_alerting-1.4.0.0.zip
           asset_content_type: application/zip
 
       # Upload the release with .rpm as asset
