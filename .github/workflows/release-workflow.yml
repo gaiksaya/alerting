@@ -35,12 +35,17 @@ jobs:
           cp alerting/build/distributions/*.deb alerting-artifacts
           cp alerting/build/distributions/*.rpm alerting-artifacts
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
+          echo "Working directory"
           pwd
+          echo "-------------------------"
           ls
+          echo "-------------------------"
           cd alerting
           ls
+          echo "-------------------------"
           cd build
           ls
+          echo "-------------------------"
           cd distributions
           ls
 #          zip_artifact=`ls alerting/build/distributions/*.zip`
