@@ -38,24 +38,6 @@ jobs:
           cp alerting/build/distributions/*.rpm alerting-artifacts
           cp alerting/build/distributions/*.rpm alerting-artifacts_rpm
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
-          echo "Working directory"
-          pwd
-          echo "-------------------------"
-          ls
-          echo "-------------------------"
-          cd alerting
-          ls
-          echo "-------------------------"
-          cd build
-          ls
-          echo "-------------------------"
-          pwd
-          echo "-------------------------"
-          cd distributions
-          ls
-#          zip_artifact=`ls alerting/alerting/build/distributions/*.zip`
-#          rpm_artifact=`ls alerting/build/distributions/*.rpm`
-#          deb_artifact=`ls alerting/build/distributions/*.deb`
 
 #     # AWS authentication
 #      - name: Configure AWS Credentials
@@ -96,30 +78,30 @@ jobs:
           asset_path: alerting-artifacts_zip
           asset_content_type: application/zip
 
-#      # Upload the release with .rpm as asset
-#      - name: Upload Release Asset
-#        uses: actions/upload-release-asset@v1.0.1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_name: alerting.rpm
-#          asset_path: rpm_artifact
-#          asset_content_type: application/zip
-#
-#      # Upload the release with .deb as asset
-#      - name: Upload Release Asset
-#        uses: actions/upload-release-asset@v1.0.1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_name: alerting.deb
-#          asset_path: deb_artifact
-#          asset_content_type: application/zip
+      # Upload the release with .rpm as asset
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_name: alerting.rpm
+          asset_path: alerting-artifacts_rpm
+          asset_content_type: application/zip
 
-#      - name: Upload Workflow Artifacts
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: alerting-plugin
-#          path: alerting-artifacts
+      # Upload the release with .deb as asset
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_name: alerting.deb
+          asset_path: alerting-artifacts_deb
+          asset_content_type: application/zip
+
+      - name: Upload Workflow Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: alerting-plugin
+          path: alerting-artifacts
