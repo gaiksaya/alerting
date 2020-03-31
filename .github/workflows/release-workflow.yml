@@ -28,6 +28,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build buildDeb buildRpm --no-daemon -Dbuild.snapshot=false
 
+      # Creating artifact path as well as individual folders for rpm, zip and deb assets
       - name: Create Artifact Path
         run: |
           mkdir -p alerting-artifacts
