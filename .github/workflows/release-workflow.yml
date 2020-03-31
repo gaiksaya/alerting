@@ -5,8 +5,6 @@ on:
     tags:
       - 'v*'
 
-
-
 jobs:
   build:
     strategy:
@@ -37,9 +35,9 @@ jobs:
           cp alerting/build/distributions/*.deb alerting-artifacts
           cp alerting/build/distributions/*.rpm alerting-artifacts
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
-          zip_artifact=`ls /build/distributions/*.zip`
-          rpm_artifact=`ls /build/distributions/*.rpm`
-          deb_artifact=`ls /build/distributions/*.deb`
+          zip_artifact=`ls $(pwd)/build/distributions/*.zip`
+          rpm_artifact=`ls $(pwd)/build/distributions/*.rpm`
+          deb_artifact=`ls $(pwd)/build/distributions/*.deb`
 
 #     # AWS authentication
 #      - name: Configure AWS Credentials
