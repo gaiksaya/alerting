@@ -1,9 +1,9 @@
 name: Upload Notification Jar to Maven
 
 on:
-  push:
-    tags: 
-      - v*
+  repository_disptach:
+    types: [maven]
+    
 jobs:
   upload-notification-jar:
     runs-on: [ubuntu-16.04]
@@ -41,4 +41,4 @@ jobs:
           
           cd alerting/notification
           
-          ../gradlew publishShadowPublicationToSonatype-stagingRepository -Dcompiler.java=13 -Dbuild.snapshot=false -Djavax.net.ssl.trustStore=/opt/hostedtoolcache/jdk/13.0.2/x64/lib/security/cacerts
+          ../gradlew publishShadowPublicationToSonatype-stagingRepository -Dcompiler.java=13 -Dbuild.snapshot=false -Djavax.net.ssl.trustStore=$JAVA_HOME/lib/security/cacerts
