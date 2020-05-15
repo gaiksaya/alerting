@@ -39,7 +39,6 @@ jobs:
           cp alerting/build/distributions/*.rpm alerting-artifacts
           cp alerting/build/distributions/*.rpm alerting-artifacts_rpm
           echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
-
       # AWS authentication
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -56,7 +55,6 @@ jobs:
           aws s3 cp alerting-artifacts/*.deb $s3_path/debs/opendistro-alerting/
           aws s3 cp alerting-artifacts/*.rpm $s3_path/rpms/opendistro-alerting/
           aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths '/downloads/*'
-
       - name: Create Github Draft Release
         id: create_release
         uses: actions/create-release@v1.0.0
